@@ -22,11 +22,27 @@ Download the PathGen Dataset:
 
 > #### Step1:
 
-Access and download the JSON file containing image names, specific positions, and captions from the [**Dataset**](https://github.com/PathGen-1-6M/PathGen-1.6M/tree/main/Data).This file is critical for the subsequent steps as it provides the necessary metadata.
+Access and download the JSON file containing image names, specific positions, and captions from the [**Dataset**](https://huggingface.co/datasets/jamessyx/PathGen). This file is critical for the subsequent steps as it provides the necessary metadata.
+
+Data example:
+
+```json
+{
+    "wsi_id": "TCGA-AA-3844-01Z-00-DX1.bf88ce1f-0601-40c8-813e-4e3df51bd2f0",
+    "position": [
+      "35136",
+      "33344"
+    ],
+    "caption": "The colon tissue exhibits pleomorphism, hyperchromatic nuclei, and irregular glandular architecture, indicative of a neoplastic process. Stroma shows inflammatory infiltration and increased cellularity, suggesting a desmoplastic reaction. These characteristics potentially point to adenocarcinoma, requiring further clinical and molecular correlation for a definitive diagnosis.",
+    "file_id": "bffacf34-4942-496d-9c5d-d36294d80a9d"
+}
+```
 
 > #### Step2:
 
 Employ the GDC Data Transfer Tool to download the whole-slide images (.svs files) referenced in the JSON file. Detailed instructions for using this tool can be found on the GDC's documentation page: https://docs.gdc.cancer.gov/Data_Transfer_Tool/Users_Guide/Getting_Started/.
+
+A simple approach is to use the `file_id` field provided by PathGen-1.6M and download the file using `gdc-client download <file_id>`.
 
 > #### Step3:
 
@@ -64,7 +80,7 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 #         "caption": "The tissue shows irregular, atypical glandular structures indicative of adenocarcinoma, with hyperchromatic nuclei, high nuclear-to-cytoplasmic ratio, and pleomorphism. Desmoplastic stroma and mitotic figures suggest high-grade dysplasia. These features confirm a diagnosis of malignant adenocarcinoma of the rectum, characterized by loss of normal glandular architecture and cellular disorganization."
 #     }
 # ]
-pathgen_data_path = 'PathGen_dataset.json'
+pathgen_data_path = 'PathGen-1.6M.json'
 with open(pathgen_data_path, 'r') as f:
     data = json.load(f)
 
@@ -121,9 +137,13 @@ This step creates the final PathGen-1.6M image-caption pairs.
 
 
 
-## Usage of Trained PathGen-CLIP model
+## Usage of PathGen-Instruct Dataset
 
-The trained PathGen-CLIP can be downloaded via this [**link**](https://pub-7a38cc906afa44a4a01533c288d0b1af.r2.dev/pathgenclip.pt) and the PathGen-CLIP-L via this  [**link**](https://huggingface.co/jamessyx/PathGen-CLIP-L).
+The usage of PathGen-Instruct and PathGen-1.6M is the same. To facilitate training of the LMM model (LLaVA), we have converted the dataset into a format that can be directly used as input for LLaVA. You can download the dataset at [**PathGen-Instruct**](https://huggingface.co/datasets/jamessyx/PathInstruct) .
+
+## Usage of Trained PathGen-CLIP series model
+
+The trained PathGen-CLIP can be downloaded via this [**PathGen-CLIP**](https://pub-7a38cc906afa44a4a01533c288d0b1af.r2.dev/pathgenclip.pt) and the PathGen-CLIP-L via this  [**PathGen-CLIP-L**](https://huggingface.co/jamessyx/PathGen-CLIP-L) (We also transform PathGen-CLIP-L to HF version [**PathGenCLIP-vit-large-patch14-hf**](https://huggingface.co/jamessyx/pathgenclip-vit-large-patch14-hf)  to facilitate the integration into LLM).
 
 ```
 pip install open_clip_torch
@@ -135,7 +155,7 @@ from PIL import Image
 import open_clip
 
 model, _, preprocess = open_clip.create_model_and_transforms('ViT-B-16', pretrained='path/pathgen-clip.pt') // PathGen-CLIP
-# model, _, preprocess = open_clip.create_model_and_transforms('ViT-B-16', pretrained='path/pathgen-clip.pt') // PathGen-CLIP-L
+# model, _, preprocess = open_clip.create_model_and_transforms('ViT-B-16', pretrained='path/pathgen-clip-l.pt') // PathGen-CLIP-L
 model.eval()  # model in train mode by default, impacts some models with BatchNorm or stochastic depth active
 tokenizer = open_clip.get_tokenizer('ViT-B-16')
 
