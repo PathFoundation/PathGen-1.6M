@@ -141,6 +141,72 @@ This step creates the final PathGen-1.6M image-caption pairs.
 
 The usage of PathGen-Instruct and PathGen-1.6M is the same. To facilitate training of the LMM model (LLaVA), we have converted the dataset into a format that can be directly used as input for LLaVA. You can download the dataset at [**PathGen-Instruct**](https://huggingface.co/datasets/jamessyx/PathInstruct) .
 
+Data example:
+
+```json
+[{
+    "id": "107770",
+    "image": "TCGA-LD-A66U-01Z-00-DX1.AEC25C62-0519-47ED-A85B-2A964BA2BA87/17120_34976.jpg",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "What is indicated by the presence of scattered inflammatory cells in the tissue?\nA) Acute inflammation\nB) Active thrombosis\nC) Normal tissue architecture\nD) Chronic inflammation\n\nFrom the choices provided, select the one that best matches the image content. Respond with only the letter.Answer with the option''s letter from the given choices directly.\n<image>"
+      },
+      {
+        "from": "gpt",
+        "value": "A"
+      }
+    ],
+    "type": "CLOSE",
+    "wsi_id": "TCGA-LD-A66U-01Z-00-DX1.AEC25C62-0519-47ED-A85B-2A964BA2BA87",
+    "file_id": "734d4a72-94ad-4274-8f14-0a9abaee1b0d",
+    "position": [
+      "17120",
+      "34976"
+    ]
+  },
+  {
+    "id": "183903",
+    "image": "TCGA-B9-4117-01Z-00-DX1.9c2239e4-0bff-4482-914d-fd59afde75ab/82656_17120.jpg",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhat features within the glomerulus suggest an active inflammatory process?"
+      },
+      {
+        "from": "gpt",
+        "value": "The glomerulus exhibits marked hypercellularity, meaning an increased number of cells within the tuft compared to normal. This increase likely involves endothelial cells, mesangial cells, and infiltrating inflammatory cells (though specific types are hard to discern definitively on H&E alone). Additionally, the presence of extravasated red blood cells (hemorrhage) within Bowman's space and potentially within the tuft indicates damage to the glomerular capillary walls, a common feature of active glomerulonephritis."
+      },
+      {
+        "from": "human",
+        "value": "Which visible changes indicate that the kidney injury process is chronic?"
+      },
+      {
+        "from": "gpt",
+        "value": "While the hypercellular glomerulus indicates active inflammation, signs of chronicity are suggested by the surrounding tissue changes mentioned in the description, such as tubular atrophy/dilation and interstitial fibrosis. Although not perfectly clear in this specific high-power field alone without comparison to less affected areas, the description implies these features are present in the overall sample. Fibrosis (interstitial scarring) and irreversible tubular changes (atrophy/dilation) are hallmarks of long-standing damage, distinguishing it from a purely acute process."
+      },
+      {
+        "from": "human",
+        "value": "How do the combined glomerular and tubulointerstitial changes reflect the overall kidney function?"
+      },
+      {
+        "from": "gpt",
+        "value": "The combination of glomerular hypercellularity/hemorrhage (indicating glomerulonephritis) and the described tubulointerstitial damage (atrophy, dilation, fibrosis, inflammation) signifies injury to multiple functional compartments of the nephron. Glomerular damage impairs filtration, while tubular and interstitial damage impairs reabsorption, secretion, and concentrating ability, leading to progressive loss of overall kidney function. The presence of fibrosis indicates irreversible scarring, consistent with chronic kidney disease potentially progressing towards end-stage renal failure."
+      }
+    ],
+    "type": "OPEN",
+    "wsi_id": "TCGA-B9-4117-01Z-00-DX1.9c2239e4-0bff-4482-914d-fd59afde75ab",
+    "file_id": "8bbbfc1f-d946-476d-ad78-728b2ebd927c",
+    "position": [
+      "82656",
+      "17120"
+    ]
+  }, .....
+]
+```
+
+
+
 ## Usage of Trained PathGen-CLIP series model
 
 The trained PathGen-CLIP can be downloaded via this [**PathGen-CLIP**](https://pub-7a38cc906afa44a4a01533c288d0b1af.r2.dev/pathgenclip.pt) and the PathGen-CLIP-L via this  [**PathGen-CLIP-L**](https://huggingface.co/jamessyx/PathGen-CLIP-L) (We also transform PathGen-CLIP-L to HF version [**PathGenCLIP-vit-large-patch14-hf**](https://huggingface.co/jamessyx/pathgenclip-vit-large-patch14-hf)  to facilitate the integration into LLM).
