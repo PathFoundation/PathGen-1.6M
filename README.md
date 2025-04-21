@@ -123,7 +123,7 @@ This step creates the final PathGen-1.6M image-caption pairs.
 
 ## Usage of Trained PathGen-CLIP model
 
-The trained PathGen-CLIP can be downloaded via this [**link**](https://pub-7a38cc906afa44a4a01533c288d0b1af.r2.dev/pathgenclip.pt).
+The trained PathGen-CLIP can be downloaded via this [**link**](https://pub-7a38cc906afa44a4a01533c288d0b1af.r2.dev/pathgenclip.pt) and the PathGen-CLIP-L via this  [**link**](https://huggingface.co/jamessyx/PathGen-CLIP-L).
 
 ```
 pip install open_clip_torch
@@ -134,9 +134,10 @@ import torch
 from PIL import Image
 import open_clip
 
-model, _, preprocess = open_clip.create_model_and_transforms('ViT-B-16', pretrained='path/pathgen-clip.pt')
+model, _, preprocess = open_clip.create_model_and_transforms('ViT-B-16', pretrained='path/pathgen-clip.pt') // PathGen-CLIP
+# model, _, preprocess = open_clip.create_model_and_transforms('ViT-B-16', pretrained='path/pathgen-clip.pt') // PathGen-CLIP-L
 model.eval()  # model in train mode by default, impacts some models with BatchNorm or stochastic depth active
-tokenizer = open_clip.get_tokenizer('ViT-B-32')
+tokenizer = open_clip.get_tokenizer('ViT-B-16')
 
 image = preprocess(Image.open("example.png")).unsqueeze(0)
 text = tokenizer(["An H&E image of tumor patch", "An H&E image of normal patch"])
