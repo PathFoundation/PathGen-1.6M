@@ -1,6 +1,6 @@
 # PathGen-1.6M
 
-This is the official repo for  **PathGen-1.6M: 1.6 Million Pathology Image-text Pairs Generation through Multi-agent Collaboration**
+This is the official repo for  [**PathGen-1.6M: 1.6 Million Pathology Image-text Pairs Generation through Multi-agent Collaboration**](https://arxiv.org/abs/2407.00203)
 
 [**Dataset**](https://huggingface.co/datasets/jamessyx/PathGen)
 
