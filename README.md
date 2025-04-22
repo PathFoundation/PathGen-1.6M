@@ -209,7 +209,7 @@ Data example:
 
 ## Usage of Trained PathGen-CLIP series model
 
-The trained PathGen-CLIP can be downloaded via this [**PathGen-CLIP**](https://pub-7a38cc906afa44a4a01533c288d0b1af.r2.dev/pathgenclip.pt) and the PathGen-CLIP-L via this  [**PathGen-CLIP-L**](https://huggingface.co/jamessyx/PathGen-CLIP-L) (We also transform PathGen-CLIP-L to HF version [**PathGenCLIP-vit-large-patch14-hf**](https://huggingface.co/jamessyx/pathgenclip-vit-large-patch14-hf)  to facilitate the integration into LLM).
+The trained PathGen-CLIP can be downloaded via  [**PathGen-CLIP**](https://pub-7a38cc906afa44a4a01533c288d0b1af.r2.dev/pathgenclip.pt) and the PathGen-CLIP-L via  [**PathGen-CLIP-L**](https://huggingface.co/jamessyx/PathGen-CLIP-L) (We also transform PathGen-CLIP-L to HF version [**PathGenCLIP-vit-large-patch14-hf**](https://huggingface.co/jamessyx/pathgenclip-vit-large-patch14-hf)  to facilitate the integration into LLM).
 
 ```
 pip install open_clip_torch
@@ -241,7 +241,13 @@ print("Label probs:", text_probs)
 
 
 
+## Usage of Trained PathGen-LLaVA
 
+The trained PathGen-LLaVA can be downloaded via  [**PathGen-LLaVA**](https://huggingface.co/jamessyx/PathGen-LLaVA). As we use our PathGen-CLIP-L as the PathGen-LLaVA's  vision encoder, so you need  to replace the vision encoder path in the config as the PathGen-CLIP-L-hf's path (where can be downloaded in this [link](https://huggingface.co/jamessyx/PathGen-LLaVA/tree/main/pathgenclip-vit-large-patch14))
+
+This model is based on 🌋 LLaVA: Large Language and Vision Assistant so model architecture and training scripts are heavily borrowed from https://github.com/haotian-liu/LLaVA.
+
+You can fully adopt the LLaVA framework to conduct inferring of this model.
 
 ## **Citation**
 
