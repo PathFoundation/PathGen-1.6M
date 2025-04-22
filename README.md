@@ -238,3 +238,19 @@ with torch.no_grad(), torch.cuda.amp.autocast():
 
 print("Label probs:", text_probs)
 ```
+
+
+
+
+
+## **Citation**
+
+```
+@article{sun2024pathgen,
+  title={Pathgen-1.6 m: 1.6 million pathology image-text pairs generation through multi-agent collaboration},
+  author={Sun, Yuxuan and Zhang, Yunlong and Si, Yixuan and Zhu, Chenglu and Shui, Zhongyi and Zhang, Kai and Li, Jingxiong and Lyu, Xingheng and Lin, Tao and Yang, Lin},
+  journal={arXiv preprint arXiv:2407.00203},
+  year={2024}
+}
+```
+
