@@ -139,7 +139,7 @@ This step creates the final PathGen-1.6M image-caption pairs.
 
 ## Usage of PathGen-Instruct Dataset
 
-The usage of PathGen-Instruct and PathGen-1.6M is the same. To facilitate training of the LMM model (LLaVA), we have converted the dataset into a format that can be directly used as input for LLaVA. You can download the dataset at [**PathGen-Instruct**](https://huggingface.co/datasets/jamessyx/PathInstruct) .
+The usage of PathGen-Instruct and PathGen-1.6M is the same. To facilitate training of the LMM model (LLaVA), we have converted the dataset into a format that can be directly used as input for LLaVA. You can download the dataset at [**PathGen-Instruct**](https://huggingface.co/datasets/jamessyx/PathGen-Instruct) .
 
 Data example:
 
